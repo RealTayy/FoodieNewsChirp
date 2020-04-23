@@ -1,0 +1,34 @@
+{
+  "name": "FoodieNewsChirp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "12.16.2"
+  },
+  "scripts": {
+    "start": "per-env",
+    "start:development": "concurrently \"npm run client\" \"npm run server\"",
+    "start:production": "npm run server",
+    "install": "concurrently \"cd client && npm install\" \"cd server && npm install\"",
+    "client": "cd client && npm run start",
+    "server": "cd server && npm run start",
+    "heroku-postbuild": "npm run build",
+    "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RealTayy/FoodieNewsChirp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RealTayy/FoodieNewsChirp/issues"
+  },
+  "homepage": "https://github.com/RealTayy/FoodieNewsChirp#readme",
+  "dependencies": {
+    "concurrently": "^5.1.0",
+    "per-env": "^1.0.2"
+  }
+}
