@@ -1,0 +1,21 @@
+mutation create_post {
+  insert_post_table(objects: [{author_id: 10, title: "What", url: "Huh"}]) {
+    returning {
+      id
+      author_id
+      title
+      url
+      created_at
+    }
+  }
+}
+
+query read_post {
+  post_table {
+    author_id
+    created_at
+    id
+    title
+    url
+  }
+}
