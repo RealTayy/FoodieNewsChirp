@@ -1,12 +1,20 @@
 import React from 'react';
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_POST_ALL } from './queries/posts';
+import { BrowserRouter as Router, Route, Link, RouteComponentProps, Switch } from "react-router-dom";
+
+import { CreatePost, PostList, PostThread } from './views';
+
 
 function App() {
   return (
     < div className="App" >
-      {console.log("GET_POST_ALL", useQuery(GET_POST_ALL))}
-    This is your app
+      <Router>
+        <Switch>
+          <Route path="/" exact component={PostList} />
+          <Route path="/create-post" exact component={CreatePost} />
+          <Route path="/post-thread/:id" exact component={PostThread} />
+          <Route component={PostList} />
+        </Switch>
+      </Router>
     </div >
   )
 }
