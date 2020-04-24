@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import { configure } from "mobx";
+
+// MobX Configuration
+configure({
+  computedRequiresReaction: true,
+  observableRequiresReaction: true,
+  reactionRequiresObservable: true,
+  enforceActions: "observed"
+})
 
 console.log("GraphQLUri:", process.env.REACT_APP_HASURA_URI);
 
