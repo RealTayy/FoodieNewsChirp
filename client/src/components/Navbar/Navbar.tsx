@@ -14,12 +14,6 @@ class Navbar extends Component {
           <Menu.Item>
             <Link to="/create-post">Create Post</Link>
           </Menu.Item>
-          <Menu.Item>
-            <Link to="/post-thread/107"> "Test Thread 107" </Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/post-thread/108"> "Test Thread 108" </Link>
-          </Menu.Item>
         </Menu>
       </div>
     )

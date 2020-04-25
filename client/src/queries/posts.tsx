@@ -8,6 +8,9 @@ export const GET_POST_ALL = gql`
       id
       title
       url
+      score
+      liked
+      disliked
     }
   }
 `;
@@ -20,6 +23,9 @@ export const GET_POST_BY_ID = gql`
       id
       title
       url
+      score
+      liked
+      disliked
     }    
   }
 `;
@@ -32,10 +38,33 @@ export const ADD_POST = gql`
         author_id
         title
         url
-        created_at
+        created_at        
       }
     }
   }
+`;
+
+export const UPDATE_POST_LIKES = gql`
+mutation update_post($id: Int!, $liked: Int!, $disliked: Int!) {
+  update_post_table(
+    where: {id: {_eq: $id}},
+    _set:{
+      liked: $liked,
+      disliked: $disliked
+    }
+  ){
+    returning {
+      author_id
+      created_at
+      id
+      title
+      url
+      disliked
+      liked
+      score
+    }
+  }
+}
 `;
 
 // import { useQuery, useMutation } from '@apollo/react-hooks';

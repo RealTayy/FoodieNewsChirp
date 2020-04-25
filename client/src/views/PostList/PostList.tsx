@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React from 'react'
 import { observer } from 'mobx-react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_POST_ALL } from '../../queries/posts';
