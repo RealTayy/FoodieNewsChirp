@@ -37,10 +37,10 @@ export const ADD_POST = gql`
     insert_post_table(
       objects: [
         {
-        author_id: 11,
-        title: "Ant Design",
-        url: "https://ant.design/",
-        description: "UI Component Library"
+        author_id: $author_id,
+        title: $title,
+        url: $url,
+        description: $description
         }
       ]
     ){

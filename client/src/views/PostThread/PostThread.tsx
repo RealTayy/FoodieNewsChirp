@@ -3,7 +3,14 @@ import { RouteComponentProps } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 import { GET_POST_BY_ID } from '../../queries/posts';
 import { PageHeader } from 'antd'
+import coffee from '../../images/coffee.jpg';
+import hamburger from '../../images/hamburger.jpg';
+import pizza from '../../images/pizza.jpg';
+import ramen from '../../images/ramen.jpg';
+import tea from '../../images/tea.jpg';
 import './PostThread.scss';
+
+const iconArr = [coffee, hamburger, pizza, ramen, tea];
 
 type TParams = { id: string };
 
@@ -51,9 +58,6 @@ const PostThread = ({ match }: RouteComponentProps<TParams>) => {
         title="Foodie News"
         subTitle="For all your food related news!."
         ghost={false}
-      // extra={[
-      //   <Button key="1" type="primary">Submit Post</Button>,
-      // ]}
       />
       PostThread View (id: {id})
     </div>

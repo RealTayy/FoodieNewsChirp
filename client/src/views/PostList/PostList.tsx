@@ -7,7 +7,18 @@ import List from '../../components/List';
 import "./PostList.scss"
 
 const PostList = observer(() => {
-  const { loading, data, error } = useQuery(GET_POST_ALL);
+  const { loading, data, error } = useQuery(GET_POST_ALL,
+    { fetchPolicy: "cache-and-network" }
+  );
+
+  React.useEffect(() => {
+    // do some checking here to ensure data exist
+    if (data) {
+      // mutate data if you need to
+      console.log(data);
+    }
+  }, [data])
+
 
   // TODO: Loading Component
   if (loading) return <div>
