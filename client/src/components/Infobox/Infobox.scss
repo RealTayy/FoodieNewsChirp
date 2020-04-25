@@ -1,0 +1,10 @@
+.Infobox {
+  margin-bottom: 16px;
+  background-color: #096dd9;
+  padding: 8px 24px;
+  font-size: 12px;
+  &__item {
+    color: white;
+    opacity: 0.8;
+  }
+}

@@ -125,15 +125,8 @@ const PostThread = ({ match }: RouteComponentProps<TParams>) => {
             {description}
           </div>
         </>}
-      </PageHeader>
-      {/* TODO: Seperate post info box to sepereate component */}
-      <div className="PostThread__info">
-        <span className="PostThread__info-item">Score: {score} | </span>
-        <span className="PostThread__info-item">Submitted By: {author_id} | </span>
-        <span className="PostThread__info-item">Comments: {"TODO"} | </span>
-        <span className="PostThread__info-item">Created At: {moment(created_at).format("YYYY-MM-DD (LT)")}</span>
-      </div>
-      <Infobox post={postData} />
+      </PageHeader>      
+      <Infobox className="PostThread__info" post={postData} />
     </div>
   )
 }

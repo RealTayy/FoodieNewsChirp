@@ -25,18 +25,11 @@
   }
   &__description {
     hr {
-      opacity: .2;
+      opacity: 0.2;
       margin-bottom: 14px;
     }
   }
   &__info {
     margin-bottom: 16px;
-    background-color: #096dd9;
-    padding: 8px 24px;
-    font-size: 12px;
-    &-item {
-      color: white;
-      opacity: 0.8;
-    }
   }
 }
