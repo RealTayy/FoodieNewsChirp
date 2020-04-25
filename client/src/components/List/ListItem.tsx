@@ -13,7 +13,6 @@ import { UPDATE_POST_LIKES } from '../../queries/posts';
 import './ListItem.scss'
 
 const iconArr = [coffee, hamburger, pizza, ramen, tea];
-
 // TODO: Proper TS Typing
 const onLikeHandler = (mutation: Function, { id, liked, disliked }: any) => {
   mutation({
@@ -37,6 +36,7 @@ const onDislikeHandler = (mutation: Function, { id, liked, disliked }: any) => {
 }
 
 // TODO: Proper TS Typing
+// TODO: Seperate reused component into it's own file
 const IconText = ({ icon, text, onClick }: any) => (
   <span onClick={onClick}>
     {React.createElement(icon, { style: { marginRight: 8 } })}
@@ -75,11 +75,12 @@ export const ListItem = ({ item }: any) => {
         </Link>
         <a className="ListItem__title-link" href={item.url} target="_blank">
           ({item.url})
-      </a>
+        </a>
       </>}
       description={<>
         <span>Score: {item.score} | </span>
         <span>Submitted By: {item.author_id} | </span>
+        <span>Submitted By: Comments: {"TODO"} | </span>
         <span>Created At: {moment(item.created_at).format("YYYY-MM-DD (LT)")}</span>
       </>}
     />

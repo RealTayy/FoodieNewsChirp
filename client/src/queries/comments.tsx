@@ -1,40 +1,23 @@
 import gql from 'graphql-tag';
 
-export const GET_POST_ALL = gql`
-  query {
-    post_table(order_by: {created_at: desc}) {
+export const GET_COMMENT_BY_POST_ID = gql`
+  query getCommentByPostId($id: Int!){    
+    comment_table(where: {id: {_eq: $id}}){
+      id
+      post_id
       author_id
       created_at
-      id
-      title
-      url
-      score
       liked
       disliked
-      description
-    }
-  }
-`;
-
-export const GET_POST_BY_ID = gql`
-  query getPostById($id: Int!){    
-    post_table(where: {id: {_eq: $id}}){      
-      author_id
-      created_at
-      id
-      title
-      url
-      score
-      liked
-      disliked
-      description
+      comment
+      parent_comment_id
     }    
   }
 `;
 
 export const ADD_POST = gql`
   mutation addPost($author_id: Int!, $title: String!, $url: String!, $description: String!) {
-    insert_post_table(
+    insert_comment_table(
       objects: [
         {
         author_id: $author_id,
@@ -60,7 +43,7 @@ export const ADD_POST = gql`
 
 export const UPDATE_POST_LIKES = gql`
 mutation updatePost($id: Int!, $liked: Int!, $disliked: Int!) {
-  update_post_table(
+  update_comment_table(
     where: {id: {_eq: $id}},
     _set:{
       liked: $liked,

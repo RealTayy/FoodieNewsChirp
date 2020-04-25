@@ -1,3 +1,42 @@
 .PostThread {
-  
+  // TODO: Clean up messy CSS file
+  &__header {
+    &-title {
+      color: #000;
+      opacity: 0.85;
+    }
+    &-subTitle {
+      color: #444;
+      opacity: 0.6;
+    }
+    .ant-page-header {
+      &-heading {
+        &-extra {
+          cursor: pointer;
+          font-size: 18px !important;
+          display: flex;
+          align-items: center;
+        }
+      }
+      &-content {
+        padding-top: 0px;
+      }
+    }
+  }
+  &__description {
+    hr {
+      opacity: .2;
+      margin-bottom: 14px;
+    }
+  }
+  &__info {
+    margin-bottom: 16px;
+    background-color: #096dd9;
+    padding: 8px 24px;
+    font-size: 12px;
+    &-item {
+      color: white;
+      opacity: 0.8;
+    }
+  }
 }
