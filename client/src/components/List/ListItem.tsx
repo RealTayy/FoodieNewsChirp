@@ -10,6 +10,7 @@ import { LikeTwoTone, DislikeTwoTone } from '@ant-design/icons';
 import moment from 'moment'
 import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_POST_LIKES } from '../../queries/posts';
+import './ListItem.scss'
 
 const iconArr = [coffee, hamburger, pizza, ramen, tea];
 
@@ -47,6 +48,7 @@ const IconText = ({ icon, text, onClick }: any) => (
 export const ListItem = ({ item }: any) => {
   const [updatePostLikes] = useMutation(UPDATE_POST_LIKES);
   return <AntList.Item
+    className="ListItem"
     actions={[
       <IconText
         icon={LikeTwoTone}
@@ -62,7 +64,11 @@ export const ListItem = ({ item }: any) => {
       />,
     ]}>
     <AntList.Item.Meta
-      avatar={<Avatar size="large" src={iconArr[item.id % 5]} />}
+      avatar={
+        <Link to={`/post-thread/${item.id}`}>
+          <Avatar size="large" src={iconArr[item.id % 5]} />
+        </Link>
+      }
       title={<>
         <Link to={`/post-thread/${item.id}`}>
           {`${item.title} `}

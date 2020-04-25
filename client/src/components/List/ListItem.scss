@@ -1,0 +1,14 @@
+.ListItem {
+  .ant-list-item-meta {
+    align-items: center !important;
+    &-title {
+      line-height: 1rem !important;
+      margin-bottom: 4px !important;
+    }
+    &-description {
+      font-size: 12px !important;
+      line-height: 1rem !important;
+      opacity: .6 !important;
+    }
+  }
+}

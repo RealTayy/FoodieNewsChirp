@@ -1,7 +1,7 @@
 import React from 'react'
 import { List as AntList } from 'antd';
-import './List.scss'
 import { ListItem } from './ListItem';
+import './List.scss'
 
 // TODO: Proper TS Typing
 const List = ({ items }: any) => {
