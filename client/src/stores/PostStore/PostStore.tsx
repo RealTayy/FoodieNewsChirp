@@ -2,19 +2,12 @@ import React, { Component, createContext } from 'react'
 import { observable, computed, action, autorun } from "mobx";
 
 class PostStore {
-  // Properties
-  @observable counter = 0;
+  // Properties  
   @observable posts = [];
 
-  // Methods
-
   // Actions
-  @action("Increasing Counter")
-  increaseCount = () => {
-    this.counter += 1;
-  }
-
   @action("Setting posts")
+  // TODO: Proper post typing
   setPosts = (posts: any) => {
     this.posts = posts;
   }

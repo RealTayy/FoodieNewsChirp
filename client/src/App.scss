@@ -1,0 +1,10 @@
+@import "~antd/dist/antd.css";
+
+.App {
+  &__content {
+    padding: 24px;
+  }
+  &__footer {
+    text-align: center;
+  }
+}
