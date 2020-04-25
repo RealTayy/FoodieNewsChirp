@@ -73,7 +73,7 @@ export const ListItem = ({ item }: any) => {
         <Link to={`/post-thread/${item.id}`}>
           {`${item.title} `}
         </Link>
-        <a href={item.url} target="_blank">
+        <a className="ListItem__title-link" href={item.url} target="_blank">
           ({item.url})
       </a>
       </>}

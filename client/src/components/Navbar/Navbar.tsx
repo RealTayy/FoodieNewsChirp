@@ -12,7 +12,7 @@ class Navbar extends Component {
             <Link to="/">Foodie News</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/create-post">Create Post</Link>
+            <Link to="/create-post">Submit Post</Link>
           </Menu.Item>
         </Menu>
       </div>

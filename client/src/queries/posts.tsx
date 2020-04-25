@@ -11,12 +11,13 @@ export const GET_POST_ALL = gql`
       score
       liked
       disliked
+      description
     }
   }
 `;
 
 export const GET_POST_BY_ID = gql`
-  query GetPostById($id: Int!){    
+  query getPostById($id: Int!){    
     post_table(where: {id: {_eq: $id}}){      
       author_id
       created_at
@@ -26,26 +27,39 @@ export const GET_POST_BY_ID = gql`
       score
       liked
       disliked
+      description
     }    
   }
 `;
 
 export const ADD_POST = gql`
-  mutation AddPost($author_id: Int!, $title: String!, $url: String!) {
-    insert_post_table(objects: [{author_id: 11, title: "Hello", url: "Hehe"}]) {
+  mutation addPost($author_id: Int!, $title: String!, $url: String!, $description: String!) {
+    insert_post_table(
+      objects: [
+        {
+        author_id: 11,
+        title: "Ant Design",
+        url: "https://ant.design/",
+        description: "UI Component Library"
+        }
+      ]
+    ){
       returning {
-        id
         author_id
+        created_at
+        id
         title
         url
-        created_at        
+        disliked
+        liked              
+        description
       }
     }
   }
 `;
 
 export const UPDATE_POST_LIKES = gql`
-mutation update_post($id: Int!, $liked: Int!, $disliked: Int!) {
+mutation updatePost($id: Int!, $liked: Int!, $disliked: Int!) {
   update_post_table(
     where: {id: {_eq: $id}},
     _set:{
@@ -62,6 +76,7 @@ mutation update_post($id: Int!, $liked: Int!, $disliked: Int!) {
       disliked
       liked
       score
+      description
     }
   }
 }

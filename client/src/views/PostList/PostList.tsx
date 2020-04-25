@@ -2,14 +2,14 @@ import React from 'react'
 import { observer } from 'mobx-react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_POST_ALL } from '../../queries/posts';
-import { PageHeader, Button } from 'antd'
+import { PageHeader } from 'antd'
 import List from '../../components/List';
 import "./PostList.scss"
 
 const PostList = observer(() => {
   const { loading, data, error } = useQuery(GET_POST_ALL);
 
-  // TODO: Loader Component
+  // TODO: Loading Component
   if (loading) return <div>
     Loading Post(s).
   </div>
@@ -26,12 +26,11 @@ const PostList = observer(() => {
       <PageHeader
         className="PostList__header"
         title="Foodie News"
-        subTitle="This page contains all of the posts"
+        subTitle="For all your food related news!."
         ghost={false}
-        extra={[
-          <Button key="1" type="primary">Submit Post</Button>,
-        ]}
-
+      // extra={[
+      //   <Button key="1" type="primary">Submit Post</Button>,
+      // ]}
       />
       <List items={post_table} />
     </div>

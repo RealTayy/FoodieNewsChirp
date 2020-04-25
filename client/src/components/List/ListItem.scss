@@ -1,4 +1,10 @@
 .ListItem {
+  &__title {
+    &-link {
+      font-size: 12px;
+      opacity: .6;
+    }
+  }
   .ant-list-item-meta {
     align-items: center !important;
     &-title {
@@ -8,7 +14,7 @@
     &-description {
       font-size: 12px !important;
       line-height: 1rem !important;
-      opacity: .6 !important;
+      opacity: 0.6 !important;
     }
   }
 }
