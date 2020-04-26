@@ -2,7 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 import { GET_POST_BY_ID } from '../../queries/posts';
-import { PageHeader, Divider } from 'antd';
+import { PageHeader } from 'antd';
 import coffee from '../../images/coffee.jpg';
 import hamburger from '../../images/hamburger.jpg';
 import pizza from '../../images/pizza.jpg';
@@ -11,9 +11,9 @@ import tea from '../../images/tea.jpg';
 import { LikeTwoTone, DislikeTwoTone } from '@ant-design/icons';
 import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_POST_LIKES } from '../../queries/posts';
-import './PostThread.scss';
-import moment from 'moment'
 import Infobox from '../../components/Infobox';
+import './PostThread.scss';
+import { CommentList } from '../../components/Comment';
 
 const iconArr = [coffee, hamburger, pizza, ramen, tea];
 
@@ -77,13 +77,10 @@ const PostThread = ({ match }: RouteComponentProps<TParams>) => {
   />
 
   const {
-    author_id,
-    created_at,
     description,
     disliked,
     id,
     liked,
-    score,
     title,
     url,
   } = postData;
@@ -125,8 +122,9 @@ const PostThread = ({ match }: RouteComponentProps<TParams>) => {
             {description}
           </div>
         </>}
-      </PageHeader>      
+      </PageHeader>
       <Infobox className="PostThread__info" post={postData} />
+      <CommentList postId={id}/>
     </div>
   )
 }

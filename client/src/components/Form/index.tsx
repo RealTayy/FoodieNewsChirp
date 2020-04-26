@@ -1,3 +1,4 @@
+import FormCreateComment from './FormCreateComment';
 import FormCreatePost from './FormCreatePost';
 
-export { FormCreatePost }
+export { FormCreateComment, FormCreatePost }

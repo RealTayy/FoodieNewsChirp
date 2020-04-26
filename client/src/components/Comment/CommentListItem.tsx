@@ -1,9 +1,11 @@
 import React from 'react'
 
-const CommentListItem = () => {
+import './CommentListItem.scss'
+// TODO: Proper TS Typing
+const CommentListItem = (comment: any) => {
   return (
-    <div>
-      
+    <div className="CommentListItem">
+      I am a cute little comment
     </div>
   )
 }
