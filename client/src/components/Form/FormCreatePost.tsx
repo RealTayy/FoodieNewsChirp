@@ -21,15 +21,25 @@ const openNotificationWithIcon = (type: "info" | "error" | "success", title: str
 
 const FormCreatePost = ({ history }: RouteComponentProps) => {
   // TODO: Proper TS Typing
+  const { username } = useContext(SessionContext);
   const [title, setTitle] = useState<any>({ value: '', touched: false })
   const [url, setUrl] = useState<any>({ value: '', touched: false })
+  const [userName, setUserName] = useState<any>({ value: username(), touched: false })
   const [submitTouched, setSubmitTouched] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [addPost] = useMutation(ADD_POST);
-  const { username } = useContext(SessionContext);
 
   // TODO: Proper TS Typing
   // Validations
+  const validateUsername = (title: any) => {
+    if (title) {
+      return {
+        validateStatus: 'success',
+        errorMsg: null,
+      }
+    }
+  }
+
   const validateTitle = (title: any) => {
     if (title) {
       return {
@@ -55,6 +65,11 @@ const FormCreatePost = ({ history }: RouteComponentProps) => {
   }
 
   // Handlers
+  const onUsernameChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setUserName({ ...validateUsername(value), value, touched: true })
+  }
+
   const onTitleChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setTitle({ ...validateTitle(value), value, touched: true })
@@ -75,10 +90,6 @@ const FormCreatePost = ({ history }: RouteComponentProps) => {
     if (url.validateStatus === 'error') return
     if (!url.value) return
 
-    // TODO: Once anoynomous user is implemented fix this
-    post = {
-      variables: { author_id: username(), ...post.variables }
-    }
     setIsSubmitting(true);
     openNotificationWithIcon('info', "Submitting...");
     const postData = await addPost(post);
@@ -89,13 +100,30 @@ const FormCreatePost = ({ history }: RouteComponentProps) => {
     history.push(`/post-thread/${id}`);
   }
 
+
   return (
     <Form
       className="FormCreatePost"
       name="create-post"
       onFinish={onFinishHandler}
       layout="vertical"
+      initialValues={
+        {
+          variables: {
+            author_id: username()
+          }
+        }
+      }
     >
+      <Form.Item
+        name={['variables', 'author_id']}
+        label="Username"
+        validateStatus={userName.validateStatus}
+        help={userName.errorMsg}
+        rules={[{ required: true, message: "Username is required" }]}
+      >
+        <Input placeholder="Enter Username" value={userName.value} onChange={onUsernameChangeHandler} />
+      </Form.Item>
       <Form.Item
         name={['variables', 'title']}
         label="Title"
