@@ -25,6 +25,35 @@ const CommentList = ({ postId }: any) => {
     Error.
   </div>
 
+  // Re-order comments and add indentation to them for nested comments
+  const createNestedComments: any = (comments: any) => {
+    if (comments.length === 0) return [];
+    const commentCopy = [...comments];
+    let nestedComments: any = [];
+    commentCopy.forEach((comment) => {
+      const found = nestedComments.findIndex((c: any) => {
+        return comment.parent_comment_id === c.id;
+      })
+      // If comment is a root level comment and has no parent comment
+      if (found === -1) {
+        // Give comment indent level of 0 and put at beginning of array
+        comment = { indent: 0, ...comment }
+        nestedComments.unshift(comment)
+      }
+      // Else comment has a parent
+      else {
+        // give comment indent level of parent + 1
+        comment = { indent: nestedComments[found].indent + 1, ...comment }
+        // insert comment after parent
+        nestedComments.splice(found + 1, 0, comment);
+      }
+    });
+    return nestedComments;
+
+  }
+
+  const test = createNestedComments(data.comment_table);
+
   return (
     <div className="CommentList">
       <PageHeader
@@ -37,7 +66,7 @@ const CommentList = ({ postId }: any) => {
         postId={postId}
         refetch={refetch}
       />
-      <hr style={{ opacity: .2 }} />
+      <hr style={{ opacity: .2, marginBottom: "0px" }} />
       {!data.comment_table.length ? <PageHeader
         style={{ padding: "0px" }}
         title="No comments yet."
@@ -46,9 +75,8 @@ const CommentList = ({ postId }: any) => {
       </PageHeader>
         :
         <List
-          size="small"
           itemLayout="horizontal"
-          dataSource={data.comment_table}
+          dataSource={test}
           renderItem={comment => <CommentListItem comment={comment} refetch={refetch} />}
         />
       }

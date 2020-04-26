@@ -14,13 +14,11 @@ const openNotificationWithIcon = (type: "info" | "error" | "success", title: str
   });
 };
 
-const FormCreateComment = ({ className, postId, refetch, parentCommentId }: any) => {
+const FormCreateComment = ({ className, postId, refetch, parentCommentId, setFormExpanded }: any) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [addComment] = useMutation(ADD_COMMENT);
   const [form] = Form.useForm();
   const { username } = useContext(SessionContext);
-
-  console.log(parentCommentId);
 
   // TODO: Proper TS Typing
   const onFinishHandler = async (comment: any) => {
@@ -28,7 +26,7 @@ const FormCreateComment = ({ className, postId, refetch, parentCommentId }: any)
       variables: {
         post_id: postId,
         author_id: username(),
-        parent_comment_id: null,
+        parent_comment_id: parentCommentId || null,
         ...comment.variables
       }
     }
@@ -37,6 +35,7 @@ const FormCreateComment = ({ className, postId, refetch, parentCommentId }: any)
     form.resetFields();
     setIsSubmitting(false);
     refetch();
+    if (setFormExpanded) setFormExpanded(false);
     openNotificationWithIcon('success', "Submitted!");
   }
 
@@ -50,7 +49,7 @@ const FormCreateComment = ({ className, postId, refetch, parentCommentId }: any)
     >
       <Form.Item
         name={['variables', 'comment']}
-        label={"Leave a comment"}
+        label={parentCommentId ? '' : "Leave a comment"}
         rules={[{ required: true, message: "Comment cannot be empty!" }]}
       >
         <Input.TextArea
@@ -64,8 +63,17 @@ const FormCreateComment = ({ className, postId, refetch, parentCommentId }: any)
           htmlType="submit"
           disabled={isSubmitting}
         >
-          Submit comment
+          {parentCommentId ? "Reply to comment " : "Submit comment"}
         </Button>
+        {setFormExpanded &&
+          <Button
+            style={{ marginLeft: "12px" }}
+            onClick={() => {
+              setFormExpanded(false)
+            }}>
+            Cancel
+            </Button>
+        }
       </Form.Item>
     </Form>
   )

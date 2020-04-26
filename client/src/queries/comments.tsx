@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_COMMENT_BY_POST_ID = gql`
   query getCommentByPostId($id: Int!){    
-    comment_table(where: {post_id: {_eq: $id}}){
+    comment_table(where: {post_id: {_eq: $id}},order_by: {created_at: asc}){
       id
       post_id
       author_id
