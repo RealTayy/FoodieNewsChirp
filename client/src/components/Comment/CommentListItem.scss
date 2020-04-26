@@ -1,3 +1,16 @@
 .CommentListItem {
-  
+  .ant-list-item-meta {
+    &-title {
+      font-size: 12px !important;
+      line-height: 1;
+    }
+    &-description {
+      font-size: 12px !important;
+      line-height: 1.2;
+    }
+  }
+  &__date {
+    font-size: 10px;
+    opacity: .5;
+  }
 }

@@ -13,8 +13,6 @@ configure({
   enforceActions: "observed"
 })
 
-console.log("GraphQLUri:", process.env.REACT_APP_HASURA_URI);
-
 const client = new ApolloClient({
   uri: process.env.REACT_APP_HASURA_URI
 });

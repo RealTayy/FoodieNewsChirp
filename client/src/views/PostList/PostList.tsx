@@ -11,15 +11,6 @@ const PostList = observer(() => {
     { fetchPolicy: "cache-and-network" }
   );
 
-  React.useEffect(() => {
-    // do some checking here to ensure data exist
-    if (data) {
-      // mutate data if you need to
-      console.log(data);
-    }
-  }, [data])
-
-
   // TODO: Loading Component
   if (loading) return <div>
     Loading Post(s).
@@ -39,9 +30,6 @@ const PostList = observer(() => {
         title="Foodie News"
         subTitle="For all your food related news!."
         ghost={false}
-      // extra={[
-      //   <Button key="1" type="primary">Submit Post</Button>,
-      // ]}
       />
       <List items={post_table} />
     </div>

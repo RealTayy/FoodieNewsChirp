@@ -124,7 +124,7 @@ const PostThread = ({ match }: RouteComponentProps<TParams>) => {
         </>}
       </PageHeader>
       <Infobox className="PostThread__info" post={postData} />
-      <CommentList postId={id}/>
+      <CommentList postId={id} />
     </div>
   )
 }

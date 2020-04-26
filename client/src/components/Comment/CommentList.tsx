@@ -4,10 +4,17 @@ import './CommentList.scss'
 import { PageHeader } from 'antd';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_COMMENT_BY_POST_ID } from '../../queries/comments';
+import CommentListItem from './CommentListItem';
+import { List } from 'antd';
 
-
+// TODO: Proper TS Typing
 const CommentList = ({ postId }: any) => {
-  const { loading, data, error } = useQuery(GET_COMMENT_BY_POST_ID, { variables: { id: postId } });
+  const { loading, data, error, refetch } = useQuery(
+    GET_COMMENT_BY_POST_ID,
+    {
+      variables: { id: postId },
+    });
+
   // TODO: Loading Component
   if (loading) return <div>
     Loading Post:{postId}.
@@ -17,10 +24,6 @@ const CommentList = ({ postId }: any) => {
   if (error) return <div>
     Error.
   </div>
-
-  console.log(data);
-  const { comment_table } = data;
-  const [commentData] = comment_table;
 
   return (
     <div className="CommentList">
@@ -32,16 +35,23 @@ const CommentList = ({ postId }: any) => {
       <FormCreateComment
         className="CommentList__createComment"
         postId={postId}
+        refetch={refetch}
       />
       <hr style={{ opacity: .2 }} />
-      {!commentData ? <PageHeader
+      {!data.comment_table.length ? <PageHeader
         style={{ padding: "0px" }}
         title="No comments yet."
       >
         it's looking a little quiet in here... Be the first one to leave a comment!
       </PageHeader>
-        : "There be comments"}
-
+        :
+        <List
+          size="small"
+          itemLayout="horizontal"
+          dataSource={data.comment_table}
+          renderItem={comment => <CommentListItem comment={comment} refetch={refetch} />}
+        />
+      }
     </div>
   )
 }

@@ -12,7 +12,7 @@ const openNotificationWithIcon = (type: "info" | "error" | "success", title: str
   });
 };
 
-const FormCreateComment = ({ className, postId }: any) => {
+const FormCreateComment = ({ className, postId, refetch }: any) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [addComment] = useMutation(ADD_COMMENT);
   const [form] = Form.useForm();
@@ -31,6 +31,7 @@ const FormCreateComment = ({ className, postId }: any) => {
     await addComment(comment);
     form.resetFields();
     setIsSubmitting(false);
+    refetch();
     openNotificationWithIcon('success', "Submitted!");
   }
 
