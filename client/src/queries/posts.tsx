@@ -12,6 +12,7 @@ export const GET_POST_ALL = gql`
       liked
       disliked
       description
+      comments
     }
   }
 `;
@@ -28,6 +29,7 @@ export const GET_POST_BY_ID = gql`
       liked
       disliked
       description
+      comments
     }    
   }
 `;

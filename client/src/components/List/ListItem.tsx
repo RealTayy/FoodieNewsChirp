@@ -80,7 +80,7 @@ export const ListItem = ({ item }: any) => {
       description={<>
         <span>Score: {item.score} | </span>
         <span>Submitted By: {item.author_id || "Anon"} | </span>
-        {/* <span>Submitted By: Comments: {"TODO"} | </span> */}
+        <span>Comments: {item.comments} | </span>
         <span>Created At: {moment(item.created_at).format("YYYY-MM-DD (LT)")}</span>
       </>}
     />
