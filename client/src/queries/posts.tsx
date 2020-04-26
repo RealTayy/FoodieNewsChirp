@@ -33,7 +33,7 @@ export const GET_POST_BY_ID = gql`
 `;
 
 export const ADD_POST = gql`
-  mutation addPost($author_id: Int!, $title: String!, $url: String!, $description: String!) {
+  mutation addPost($author_id: String!, $title: String!, $url: String!, $description: String!) {
     insert_post_table(
       objects: [
         {

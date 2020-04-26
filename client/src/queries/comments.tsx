@@ -19,7 +19,7 @@ export const ADD_COMMENT = gql`
   mutation addPost(
       $comment: String!,
       $parent_comment_id: Int,
-      $author_id: Int!,
+      $author_id: String!,
       $post_id: Int!,
   ) {
     insert_comment_table(

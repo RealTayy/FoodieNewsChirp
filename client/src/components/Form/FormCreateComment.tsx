@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Input, Button, notification } from 'antd'
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_COMMENT } from '../../queries/comments';
 import classnames from 'classnames';
+import SessionContext from '../../SessionContext';
+
 
 // TODO: Used in both form components. Export to seperate component.
 const openNotificationWithIcon = (type: "info" | "error" | "success", title: string) => {
@@ -16,13 +18,14 @@ const FormCreateComment = ({ className, postId, refetch }: any) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [addComment] = useMutation(ADD_COMMENT);
   const [form] = Form.useForm();
+  const { username } = useContext(SessionContext);
 
   // TODO: Proper TS Typing
   const onFinishHandler = async (comment: any) => {
     comment = {
       variables: {
         post_id: postId,
-        author_id: 1,
+        author_id: username,
         parent_comment_id: null,
         ...comment.variables
       }

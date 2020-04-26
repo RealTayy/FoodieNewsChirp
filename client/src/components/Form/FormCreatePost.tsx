@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Input, Button, notification } from 'antd'
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_POST } from '../../queries/posts';
 import './FormCreatePost.scss'
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import SessionContext from '../../SessionContext';
 
 // Helper that uses REGEX that validates if valid URL format
 const validateUrlFormat = (value: string) => {
@@ -18,13 +19,14 @@ const openNotificationWithIcon = (type: "info" | "error" | "success", title: str
   });
 };
 
-const FormCreatePost = (history: RouteComponentProps) => {
+const FormCreatePost = ({ history }: RouteComponentProps) => {
   // TODO: Proper TS Typing
   const [title, setTitle] = useState<any>({ value: '', touched: false })
   const [url, setUrl] = useState<any>({ value: '', touched: false })
   const [submitTouched, setSubmitTouched] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [addPost] = useMutation(ADD_POST);
+  const { username } = useContext(SessionContext);
 
   // TODO: Proper TS Typing
   // Validations
@@ -75,7 +77,7 @@ const FormCreatePost = (history: RouteComponentProps) => {
 
     // TODO: Once anoynomous user is implemented fix this
     post = {
-      variables: { author_id: 1, ...post.variables }
+      variables: { author_id: username, ...post.variables }
     }
     setIsSubmitting(true);
     openNotificationWithIcon('info', "Submitting...");
@@ -84,7 +86,7 @@ const FormCreatePost = (history: RouteComponentProps) => {
     openNotificationWithIcon('success', "Submitted!");
 
     const id = postData.data.insert_post_table.returning[0].id;
-    history.history.push(`/post-thread/${id}`);
+    history.push(`/post-thread/${id}`);
   }
 
   return (
