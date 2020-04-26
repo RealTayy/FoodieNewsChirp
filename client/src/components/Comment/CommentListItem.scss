@@ -1,4 +1,5 @@
-.CommentListItem {
+.CommentListItem {  
+  flex-direction: column;
   .ant-list-item-meta {
     &-title {
       font-size: 12px !important;
@@ -12,5 +13,9 @@
   &__date {
     font-size: 10px;
     opacity: .5;
+  }
+  &__form {
+    margin-top: 16px !important;
+    width: 100%;
   }
 }

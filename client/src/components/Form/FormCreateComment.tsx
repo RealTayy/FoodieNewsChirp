@@ -14,18 +14,20 @@ const openNotificationWithIcon = (type: "info" | "error" | "success", title: str
   });
 };
 
-const FormCreateComment = ({ className, postId, refetch }: any) => {
+const FormCreateComment = ({ className, postId, refetch, parentCommentId }: any) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [addComment] = useMutation(ADD_COMMENT);
   const [form] = Form.useForm();
   const { username } = useContext(SessionContext);
+
+  console.log(parentCommentId);
 
   // TODO: Proper TS Typing
   const onFinishHandler = async (comment: any) => {
     comment = {
       variables: {
         post_id: postId,
-        author_id: username,
+        author_id: username(),
         parent_comment_id: null,
         ...comment.variables
       }

@@ -28,7 +28,7 @@ const PostList = observer(() => {
       <PageHeader
         className="PostList__header"
         title="Foodie News"
-        subTitle="For all your food related news!."
+        subTitle="For all your food related news!"
         ghost={false}
       />
       <List items={post_table} />

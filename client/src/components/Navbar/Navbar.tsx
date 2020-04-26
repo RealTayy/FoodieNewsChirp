@@ -6,23 +6,17 @@ import SessionContext from '../../SessionContext';
 
 const Navbar = ({ location }: RouteComponentProps) => {
   const { username, getRandomUsername } = useContext(SessionContext);
-  const [selectedKey, setSelectedKey] = useState('');
   const [userName, setuserName] = useState(username)
-
-  useEffect(() => {
-    setSelectedKey(location.pathname);
-  }, [])
 
   // TODO: Proper TS Typing
   const onClickHandler = (e: any) => {
     if (e.key === 'gen') return setuserName(getRandomUsername());
-    else setSelectedKey(e.key);
   }
 
   return (
     <div className="Navbar">
       {/* TODO: Add Logo..? */}
-      <Menu className="Navbar__menu" theme="dark" mode="horizontal" selectedKeys={[selectedKey]} onClick={onClickHandler}>
+      <Menu className="Navbar__menu" theme="dark" mode="horizontal" selectedKeys={[location.pathname]} onClick={onClickHandler}>
         <Menu.Item key="/">
           <Link to="/">Foodie News</Link>
         </Menu.Item>

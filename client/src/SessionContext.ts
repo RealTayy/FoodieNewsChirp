@@ -12,9 +12,13 @@ const getRandomUsername = () => {
   return randomName;
 }
 
+const getCurrentUser = () => {
+  return localStorage.getItem("username");
+}
+
 if (!localStorage.getItem("username")) getRandomUsername();
 const SessionContext = React.createContext({
-  username: localStorage.getItem("username"),
+  username: getCurrentUser,
   getRandomUsername: getRandomUsername
 });
 

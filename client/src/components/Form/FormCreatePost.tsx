@@ -77,7 +77,7 @@ const FormCreatePost = ({ history }: RouteComponentProps) => {
 
     // TODO: Once anoynomous user is implemented fix this
     post = {
-      variables: { author_id: username, ...post.variables }
+      variables: { author_id: username(), ...post.variables }
     }
     setIsSubmitting(true);
     openNotificationWithIcon('info', "Submitting...");

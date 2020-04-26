@@ -9,7 +9,7 @@ const CreatePost = () => {
       <PageHeader
         className="CreatePost__header"
         title="Submit Post"
-        subTitle="Looking at your submission is making me hungry."
+        subTitle="yum."
         ghost={false}
       />
       <FormCreatePost />
